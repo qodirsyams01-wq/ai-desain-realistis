@@ -217,7 +217,7 @@
         <!-- Gaya & Detail -->
         <div class="glass p-5 mb-6">
             <h3 class="font-semibold text-lg mb-4"><i class="fa fa-paint-brush mr-2 text-yellow-400"></i>Gaya & Detail Desain</h3>
-           
+            
             <div class="mb-5">
                 <label class="text-sm text-gray-400 mb-2 block">Gaya Arsitektur</label>
                 <div class="flex flex-wrap gap-2">
@@ -258,7 +258,7 @@
         <!-- Upload / Kamera -->
         <div class="glass p-5 mb-6">
             <h3 class="font-semibold text-lg mb-4"><i class="fa fa-camera mr-2 text-green-400"></i>Ambil Foto atau Upload Gambar</h3>
-           
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Kamera -->
                 <div>
@@ -517,8 +517,9 @@
             document.getElementById('btn-generate').disabled = !(hasKey && hasImage);
         }
 
-        // === Susun Prompt ===
+        // === Susun Prompt — DIPERBAIKI TOTAL ===
         function buildPrompt() {
+            // Pakai pemetaan langsung, TIDAK baca textContent
             const namaTipe = {
                 building: 'desain bangunan',
                 interior: 'desain interior',
@@ -541,7 +542,7 @@
                 sore: 'cahaya matahari sore yang hangat dan lembut',
                 malam: 'pencahayaan malam yang indah dengan lampu taman',
                 studio: 'pencahayaan studio yang merata dan terang'
-            }[lighting];
+            }[lighting] || 'pencahayaan alami yang terang di siang hari';
 
             const extra = document.getElementById('extra-prompt').value.trim();
 

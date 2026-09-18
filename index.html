@@ -11,6 +11,7 @@
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
+            min-height: 100vh;
         }
         .glass {
             background: rgba(255, 255, 255, 0.08);
@@ -24,79 +25,81 @@
             border: none;
             padding: 12px 24px;
             border-radius: 12px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         .btn-gradient:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
         }
         .btn-gradient:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
         .btn-secondary {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
         }
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.2);
-            transform: none;
-            box-shadow: none;
+            background: rgba(255, 255, 255, 0.18);
         }
         .card-option {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             border: 2px solid transparent;
             border-radius: 12px;
-            padding: 14px;
+            padding: 16px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.2s;
         }
-        .card-option:hover {
+        .card-option:hover, .card-option.active {
             border-color: #8b5cf6;
             background: rgba(139, 92, 246, 0.15);
         }
-        .card-option.aktif {
+        input, select, textarea {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: white;
+            width: 100%;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
             border-color: #8b5cf6;
-            background: rgba(139, 92, 246, 0.25);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
         }
-        .video-box {
-            border-radius: 16px;
-            overflow: hidden;
-            background: #000;
+        .tab-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .hasil-box {
-            border-radius: 16px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.05);
+        .tab-btn.active {
+            background: #8b5cf6;
+            color: white;
         }
-        .loading-spin {
-            border: 4px solid rgba(255,255,255,0.2);
-            border-top: 4px solid #8b5cf6;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .preview-img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 12px;
         }
         .comparison-container {
             position: relative;
             width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 16px;
         }
         .comparison-slider {
             position: absolute;
@@ -108,7 +111,7 @@
             cursor: ew-resize;
             z-index: 10;
         }
-        .comparison-slider::before {
+        .comparison-slider::after {
             content: '';
             position: absolute;
             top: 50%;
@@ -116,698 +119,566 @@
             transform: translate(-50%, -50%);
             width: 40px;
             height: 40px;
-            background: #8b5cf6;
             border-radius: 50%;
-            border: 3px solid white;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
-        .img-after {
-            width: 100%;
-            display: block;
-        }
-        .img-before-wrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 100%;
-            overflow: hidden;
-        }
-        .img-before {
-            height: 100%;
-            width: auto;
-            min-width: 100%;
-        }
-        .label-before, .label-after {
-            position: absolute;
-            top: 10px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: bold;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            z-index: 5;
-        }
-        .label-before { left: 10px; }
-        .label-after { right: 10px; }
-        .tab-btn {
-            padding: 10px 16px;
-            border-radius: 8px;
-            border: none;
+        .history-item {
             background: rgba(255,255,255,0.05);
-            color: #94a3b8;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .tab-btn.aktif {
-            background: #8b5cf6;
-            color: white;
-        }
-        .tab-content { display: none; }
-        .tab-content.aktif { display: block; }
-        .galeri-item {
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .galeri-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 5px 20px rgba(139,92,246,0.3);
-        }
-        input, select, textarea {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.15);
-            color: white;
             border-radius: 10px;
             padding: 12px;
-            width: 100%;
-            margin: 8px 0;
-            outline: none;
+            margin-bottom: 10px;
         }
-        input:focus, select:focus, textarea:focus {
-            border-color: #8b5cf6;
+        .spinner {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #8b5cf6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
-        select option {
-            background: #1e293b;
-            color: white;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .badge-purple { background: rgba(139,92,246,0.2); color: #c4b5fd; }
-        .badge-green { background: rgba(34,197,94,0.2); color: #86efac; }
-        .badge-amber { background: rgba(245,158,11,0.2); color: #fcd34d; }
-        .hidden { display: none !important; }
     </style>
 </head>
-<body>
- <div class="container mx-auto px-4 py-6 max-w-7xl">
-    <!-- HEADER -->
-    <header class="text-center mb-8 fade-in">
-        <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            🎨 AI Desain Realistis V2.0
+<body class="px-4 py-6 max-w-6xl mx-auto">
+    <header class="text-center mb-8">
+        <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <i class="fa fa-paint-brush mr-2"></i>AI Desain Realistis V2.0
         </h1>
-        <p class="text-gray-300 mt-2 text-sm">
-            Foto bangunan, ruangan, taman, atau kolam → otomatis jadi desain profesional
-        </p>
+        <p class="text-gray-400 mt-2">Foto bangunan, ruangan, taman, atau kolam → otomatis jadi desain profesional</p>
     </header>
 
-    <!-- TAB NAVIGASI -->
-    <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
-        <button class="tab-btn aktif" onclick="bukaTab('buat')">
+    <!-- Tab Menu -->
+    <div class="flex justify-center gap-2 mb-8">
+        <button class="tab-btn active" data-tab="create">
             <i class="fa fa-magic mr-1"></i> Buat Desain
         </button>
-        <button class="tab-btn" onclick="bukaTab('riwayat')">
+        <button class="tab-btn" data-tab="history">
             <i class="fa fa-history mr-1"></i> Riwayat
         </button>
-        <button class="tab-btn" onclick="bukaTab('pengaturan')">
+        <button class="tab-btn" data-tab="settings">
             <i class="fa fa-cog mr-1"></i> Pengaturan
         </button>
     </div>
 
-    <!-- ===== TAB: BUAT DESAIN ===== -->
-    <div id="tab-buat" class="tab-content aktif">
-
-        <!-- API Key & Provider -->
-        <div class="glass p-4 mb-6 fade-in">
-            <h3 class="font-bold mb-3 flex items-center gap-2">
-                <i class="fa fa-cog text-purple-400"></i> Pengaturan AI
-            </h3>
-            <div class="grid md:grid-cols-2 gap-4">
+    <!-- Tab: Buat Desain -->
+    <div id="tab-create" class="tab-content">
+        <!-- Pengaturan AI -->
+        <div class="glass p-5 mb-6">
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-cogs mr-2 text-purple-400"></i>Pengaturan AI</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm text-gray-300 mb-1">Penyedia AI</label>
-                    <select id="aiProvider">
-                        <option value="openai" selected>🔮 OpenAI (DALL-E 3) — Paling Realistis</option>
-                        <option value="stability">🎨 Stability AI — Kontrol Tinggi</option>
-                        <option value="gemini">✨ Google Gemini — Multi-Modal</option>
+                    <label class="text-sm text-gray-400 mb-1 block">Penyedia AI</label>
+                    <select id="ai-provider">
+                        <option value="openai" selected>OpenAI (DALL-E 3) — Paling Realistis</option>
+                        <option value="stability">Stability AI — Gaya Seni</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm text-gray-300 mb-1">API Key</label>
-                    <input type="password" id="apiKey" placeholder="Masukkan API Key...">
-                </div>
-            </div>
-            <p class="text-xs text-gray-400 mt-2">
-                💡 Key hanya tersimpan di browser Anda, tidak dikirim ke server lain.
-            </p>
-        </div>
-
-        <!-- Pilihan Tipe Desain -->
-        <div class="glass p-6 mb-6 fade-in">
-            <h2 class="text-xl font-bold mb-4">📌 Pilih Tipe Desain</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="card-option aktif" data-tipe="bangunan">
-                    <i class="fa fa-building text-3xl text-purple-400"></i>
-                    <h3 class="mt-2 font-semibold">Desain Bangunan</h3>
-                    <p class="text-xs text-gray-400">Rumah, kantor, fasad</p>
-                </div>
-                <div class="card-option" data-tipe="interior">
-                    <i class="fa fa-home text-3xl text-pink-400"></i>
-                    <h3 class="mt-2 font-semibold">Desain Interior</h3>
-                    <p class="text-xs text-gray-400">Kamar, ruang tamu, dapur</p>
-                </div>
-                <div class="card-option" data-tipe="taman">
-                    <i class="fa fa-leaf text-3xl text-green-400"></i>
-                    <h3 class="mt-2 font-semibold">Desain Taman</h3>
-                    <p class="text-xs text-gray-400">Taman minimalis, tropis</p>
-                </div>
-                <div class="card-option" data-tipe="kolam">
-                    <i class="fa fa-tint text-3xl text-blue-400"></i>
-                    <h3 class="mt-2 font-semibold">Desain Kolam</h3>
-                    <p class="text-xs text-gray-400">Kolam renang, kolam ikan</p>
+                    <label class="text-sm text-gray-400 mb-1 block">API Key</label>
+                    <input type="password" id="api-key" placeholder="Masukkan API Key...">
+                    <p class="text-xs text-gray-500 mt-1">Key hanya tersimpan di browser Anda, tidak dikirim ke server lain.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Gaya Desain & Pengaturan Lanjutan -->
-        <div class="glass p-6 mb-6 fade-in">
-            <h2 class="text-xl font-bold mb-4">🎨 Gaya & Detail Desain</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-semibold mb-2">Gaya Arsitektur</label>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="card-option aktif text-center py-2 px-3 text-sm" data-gaya="minimalis" onclick="pilihGaya('minimalis')">Minimalis</div>
-                        <div class="card-option text-center py-2 px-3 text-sm" data-gaya="modern" onclick="pilihGaya('modern')">Modern</div>
-                        <div class="card-option text-center py-2 px-3 text-sm" data-gaya="klasik" onclick="pilihGaya('klasik')">Klasik</div>
-                        <div class="card-option text-center py-2 px-3 text-sm" data-gaya="skandinavia" onclick="pilihGaya('skandinavia')">Skandinavia</div>
-                        <div class="card-option text-center py-2 px-3 text-sm" data-gaya="industrial" onclick="pilihGaya('industrial')">Industrial</div>
-                        <div class="card-option text-center py-2 px-3 text-sm" data-gaya="tropis" onclick="pilihGaya('tropis')">Tropis</div>
-                    </div>
+        <!-- Pilih Tipe Desain -->
+        <div class="glass p-5 mb-6">
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-th-large mr-2 text-pink-400"></i>Pilih Tipe Desain</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="card-option active" data-type="building">
+                    <i class="fa fa-building text-2xl text-purple-400 mb-2"></i>
+                    <div class="font-semibold">Desain Bangunan</div>
+                    <div class="text-xs text-gray-400 mt-1">Rumah, kantor, fasad</div>
                 </div>
+                <div class="card-option" data-type="interior">
+                    <i class="fa fa-home text-2xl text-pink-400 mb-2"></i>
+                    <div class="font-semibold">Desain Interior</div>
+                    <div class="text-xs text-gray-400 mt-1">Kamar, ruang tamu, dapur</div>
+                </div>
+                <div class="card-option" data-type="garden">
+                    <i class="fa fa-leaf text-2xl text-green-400 mb-2"></i>
+                    <div class="font-semibold">Desain Taman</div>
+                    <div class="text-xs text-gray-400 mt-1">Taman minimalis, tropis</div>
+                </div>
+                <div class="card-option" data-type="pond">
+                    <i class="fa fa-tint text-2xl text-blue-400 mb-2"></i>
+                    <div class="font-semibold">Desain Kolam</div>
+                    <div class="text-xs text-gray-400 mt-1">Kolam renang, kolam ikan</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gaya & Detail -->
+        <div class="glass p-5 mb-6">
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-paint-brush mr-2 text-yellow-400"></i>Gaya & Detail Desain</h3>
+            
+            <div class="mb-5">
+                <label class="text-sm text-gray-400 mb-2 block">Gaya Arsitektur</label>
+                <div class="flex flex-wrap gap-2">
+                    <button class="btn-secondary style-btn active" data-style="minimalis">Minimalis</button>
+                    <button class="btn-secondary style-btn" data-style="modern">Modern</button>
+                    <button class="btn-secondary style-btn" data-style="klasik">Klasik</button>
+                    <button class="btn-secondary style-btn" data-style="skandinavia">Skandinavia</button>
+                    <button class="btn-secondary style-btn" data-style="industrial">Industrial</button>
+                    <button class="btn-secondary style-btn" data-style="tropis">Tropis</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-semibold mb-2">Pencahayaan</label>
-                    <select id="pencahayaan">
+                    <label class="text-sm text-gray-400 mb-1 block">Pencahayaan</label>
+                    <select id="lighting">
                         <option value="alami" selected>☀️ Cahaya Alami (Siang)</option>
-                        <option value="hangat">🌅 Cahaya Hangat (Sore)</option>
-                        <option value="malam">🌙 Pencahayaan Malam</option>
-                        <option value="studio">💡 Pencahayaan Studio</option>
-                    </select>
-                    <label class="block text-sm font-semibold mt-4 mb-2">Tingkat Detail</label>
-                    <select id="detailLevel">
-                        <option value="rendah">Standar — Cepat & Ringan</option>
-                        <option value="sedang" selected>Tinggi — Detail Lengkap</option>
-                        <option value="tinggi">Ultra Realistis — Paling Detail</option>
-                    </select>
-                    <label class="block text-sm font-semibold mt-4 mb-2">Rasio Gambar</label>
-                    <select id="rasioGambar">
-                        <option value="1024x1024" selected>⬜ Kotak — 1024×1024</option>
-                        <option value="1792x1024">🖥️ Landscape — 1792×1024</option>
-                        <option value="1024x1792">📱 Portrait — 1024×1792</option>
+                        <option value="sore">🌅 Sore Hari — Hangat</option>
+                        <option value="malam">🌙 Malam — Lampu & Suasana</option>
+                        <option value="studio">💡 Studio — Terang & Rapi</option>
                     </select>
                 </div>
+                <div>
+                    <label class="text-sm text-gray-400 mb-1 block">Tingkat Detail</label>
+                    <select id="detail-level">
+                        <option value="standar">Standar — Cepat</option>
+                        <option value="tinggi" selected>Tinggi — Detail Lengkap</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <label class="text-sm text-gray-400 mb-1 block">Detail Tambahan / Catatan Khusus (Opsional)</label>
+                <textarea id="extra-prompt" rows="2" placeholder="Contoh: Cat dinding warna putih, tambahkan pagar batu, taman bunga di samping..."></textarea>
             </div>
         </div>
 
-        <!-- KAMERA / UPLOAD -->
-        <div class="glass p-6 mb-6 fade-in">
-            <h2 class="text-xl font-bold mb-4">📷 Ambil Foto atau Upload Gambar</h2>
-            <div class="grid md:grid-cols-2 gap-6">
+        <!-- Upload / Kamera -->
+        <div class="glass p-5 mb-6">
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-camera mr-2 text-green-400"></i>Ambil Foto atau Upload Gambar</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Kamera -->
                 <div>
-                    <div class="video-box">
-                        <video id="video" autoplay playsinline muted class="w-full h-64 object-cover bg-gray-900"></video>
-                    </div>
-                    <div class="flex gap-3 mt-4">
-                        <button id="btnBukaKamera" class="btn-gradient flex-1">
-                            <i class="fa fa-camera"></i> Buka Kamera
+                    <video id="camera-feed" autoplay playsinline class="w-full rounded-xl bg-black aspect-video"></video>
+                    <div class="flex gap-3 mt-3">
+                        <button id="btn-open-camera" class="btn-secondary flex-1">
+                            <i class="fa fa-camera mr-2"></i>Buka Kamera
                         </button>
-                        <button id="btnAmbilFoto" class="btn-gradient flex-1" disabled>
-                            <i class="fa fa-check"></i> Ambil Foto
+                        <button id="btn-capture" class="btn-gradient flex-1" disabled>
+                            <i class="fa fa-check mr-2"></i>Ambil Foto
                         </button>
                     </div>
                 </div>
-                <div class="flex flex-col items-center justify-center border-2 border-dashed border-white/20 rounded-xl p-6">
-                    <i class="fa fa-upload text-4xl text-purple-400"></i>
-                    <p class="mt-3 text-gray-300 text-center">Atau pilih gambar dari galeri</p>
-                    <input type="file" id="fileUpload" accept="image/*" class="hidden">
-                    <button id="btnUpload" class="btn-gradient mt-3">
-                        Pilih Gambar
+
+                <!-- Upload -->
+                <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-600 rounded-xl p-6 min-h-[240px]" id="upload-area">
+                    <i class="fa fa-upload text-4xl text-gray-500 mb-3"></i>
+                    <p class="text-gray-400 mb-4 text-center">Atau upload gambar dari galeri</p>
+                    <button id="btn-upload" class="btn-gradient">
+                        <i class="fa fa-folder-open mr-2"></i>Pilih Gambar
                     </button>
+                    <input type="file" id="file-input" accept="image/*" class="hidden">
                 </div>
             </div>
-            <div id="previewFoto" class="mt-6 hidden">
-                <h3 class="text-lg font-semibold mb-3">📸 Preview Foto Asli</h3>
-                <img id="imgPreview" class="w-full rounded-xl shadow-lg" alt="Preview Foto">
-                <button id="btnHapusFoto" class="text-red-400 text-sm mt-2">
+
+            <!-- Preview Gambar -->
+            <div id="preview-section" class="mt-4 hidden">
+                <p class="text-sm text-gray-400 mb-2">Gambar yang dipilih:</p>
+                <img id="preview-image" class="preview-img">
+                <button id="btn-remove-image" class="text-red-400 text-sm mt-2">
                     <i class="fa fa-times"></i> Hapus Gambar
                 </button>
             </div>
         </div>
 
-        <div class="glass p-6 mb-6 fade-in">
-            <h2 class="text-xl font-bold mb-4">✏️ Detail Tambahan (Opsional)</h2>
-            <textarea id="promptDesain" rows="3"
-                class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:border-purple-500"
-                placeholder="Contoh: rumah 2 lantai, atap datar, warna krem dan kayu..."></textarea>
-            <div class="mt-4 p-4 bg-white/5 rounded-lg">
-                <label class="block text-sm font-semibold mb-2">💰 Estimasi Biaya Bangunan (Opsional)</label>
-                <div class="grid grid-cols-2 gap-4">
-                    <div><input type="number" id="luasBangunan" placeholder="Luas m²" class="!mb-0"></div>
-                    <div>
-                        <select id="kualitasBangunan" class="!mb-0">
-                            <option value="">-- Pilih Kualitas --</option>
-                            <option value="ekonomis">Ekonomis — Rp 2.500.000/m²</option>
-                            <option value="standar">Standar — Rp 3.500.000/m²</option>
-                            <option value="menengah">Menengah — Rp 5.000.000/m²</option>
-                            <option value="mewah">Mewah — Rp 8.000.000/m²+</option>
-                        </select>
+        <!-- Tombol Buat Desain -->
+        <button id="btn-generate" class="btn-gradient w-full text-lg py-4 mb-6" disabled>
+            <i class="fa fa-magic mr-2"></i>BUAT DESAIN AI
+        </button>
+
+        <!-- Hasil -->
+        <div id="loading-section" class="hidden">
+            <div class="spinner"></div>
+            <p class="text-center text-gray-400">Sedang membuat desain... Tunggu 10–30 detik</p>
+        </div>
+
+        <div id="result-section" class="hidden">
+            <div class="glass p-5">
+                <h3 class="font-semibold text-lg mb-4">✅ Hasil Desain</h3>
+                <div class="comparison-container" id="comparison-wrapper">
+                    <div class="absolute top-0 left-0 w-1/2 overflow-hidden" id="before-wrapper">
+                        <img id="before-image" class="w-full">
                     </div>
+                    <img id="after-image" class="w-full">
+                    <div class="comparison-slider" id="slider-handle"></div>
                 </div>
-                <div id="estimasiBiayaBox" class="mt-3 text-sm text-green-400 hidden">
-                    💰 Estimasi: <span id="estimasiBiayaNilai" class="font-bold text-lg"></span>
+                <div class="flex gap-3 mt-5">
+                    <a id="btn-download" class="btn-gradient flex-1 text-center" download="desain-ai.jpg">
+                        <i class="fa fa-download mr-2"></i>Unduh Hasil
+                    </a>
+                    <button id="btn-share-wa" class="btn-secondary flex-1">
+                        <i class="fa fa-whatsapp mr-2 text-green-400"></i>Bagikan WA
+                    </button>
+                    <button id="btn-new" class="btn-secondary flex-1">
+                        <i class="fa fa-refresh mr-2"></i>Desain Baru
+                    </button>
                 </div>
             </div>
-            <button id="btnGenerate" class="btn-gradient mt-5 w-full text-lg py-4" disabled>
-                <i class="fa fa-magic mr-2"></i> BUAT DESAIN AI — KLIK DISINI
+        </div>
+    </div>
+
+    <!-- Tab: Riwayat -->
+    <div id="tab-history" class="tab-content hidden">
+        <div class="glass p-5">
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-history mr-2 text-purple-400"></i>Riwayat Desain</h3>
+            <div id="history-list">
+                <p class="text-gray-400 text-center py-4">Belum ada riwayat desain.</p>
+            </div>
+            <button id="btn-clear-history" class="text-red-400 text-sm mt-4">
+                <i class="fa fa-trash"></i> Hapus Semua Riwayat
             </button>
         </div>
-
-        <div id="loadingBox" class="hidden text-center my-12">
-            <div class="loading-spin mx-auto"></div>
-            <p class="mt-4 text-gray-300 text-lg">⏳ Sedang membuat desain... Harap tunggu 10–30 detik</p>
-        </div>
-
-        <div id="hasilBox" class="hidden fade-in">
-            <div class="glass p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold">✅ Hasil Desain Realistis</h2>
-                    <span class="badge badge-purple" id="tipeBadge">Bangunan</span>
-                </div>
-                <div class="comparison-container mb-6">
-                    <div class="label-before">📸 Asli</div>
-                    <div class="label-after">✨ Desain AI</div>
-                    <div class="hasil-box">
-                        <img id="imgAfter" class="img-after" src="" alt="Hasil Desain">
-                        <div class="img-before-wrap">
-                            <img id="imgBefore" class="img-before" src="" alt="Foto Asli">
-                        </div>
-                        <div class="comparison-slider" id="slider"></div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
-                    <a id="btnDownload" class="btn-gradient text-sm py-3" href="" download="desain-ai.jpg">
-                        <i class="fa fa-download mr-1"></i> Download
-                    </a>
-                    <button id="btnShareWA" class="btn-gradient text-sm py-3" style="background: linear-gradient(135deg, #25d366, #128c7e);">
-                        <i class="fa fa-whatsapp mr-1"></i> WhatsApp
-                    </button>
-                    <button id="btnShareIG" class="btn-gradient text-sm py-3" style="background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);">
-                        <i class="fa fa-instagram mr-1"></i> Instagram
-                    </button>
-                    <button id="btnBuatUlang" class="btn-gradient btn-secondary text-sm py-3">
-                        <i class="fa fa-refresh mr-1"></i> Baru
-                    </button>
-                </div>
-                <div class="mt-6 p-5 bg-white/5 rounded-xl">
-                    <h3 class="text-lg font-semibold mb-3">📋 Laporan Desain Lengkap</h3>
-                    <div class="grid md:grid-cols-2 gap-4 mb-4">
-                        <div><p class="text-sm text-gray-400">Tipe Desain</p><p class="font-semibold" id="infoTipe">-</p></div>
-                        <div><p class="text-sm text-gray-400">Gaya Arsitektur</p><p class="font-semibold" id="infoGaya">-</p></div>
-                        <div><p class="text-sm text-gray-400">Pencahayaan</p><p class="font-semibold" id="infoCahaya">-</p></div>
-                        <div><p class="text-sm text-gray-400">Tingkat Detail</p><p class="font-semibold" id="infoDetail">-</p></div>
-                    </div>
-                    <div class="border-t border-white/10 pt-4 mt-4">
-                        <h4 class="font-semibold mb-2">🎨 Rekomendasi Material & Warna</h4>
-                        <p id="rekomendasiTeks" class="text-gray-300 text-sm leading-relaxed"></p>
-                    </div>
-                    <div id="estimasiHasilBox" class="border-t border-white/10 pt-4 mt-4 hidden">
-                        <h4 class="font-semibold mb-2">💰 Estimasi Anggaran</h4>
-                        <div class="grid grid-cols-2 gap-2 text-sm">
-                            <div>Luas Bangunan: <span id="hasilLuas" class="font-bold">-</span> m²</div>
-                            <div>Kualitas: <span id="hasilKualitas" class="font-bold">-</span></div>
-                            <div class="col-span-2 text-lg text-green-400 font-bold mt-2">
-                                Total Estimasi: <span id="hasilTotalBiaya">-</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <div id="tab-riwayat" class="tab-content">
-        <div class="glass p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold">📂 Riwayat Desain</h2>
-                <button onclick="hapusSemuaRiwayat()" class="text-red-400 text-sm hover:text-red-300">
-                    <i class="fa fa-trash mr-1"></i> Hapus Semua
-                </button>
-            </div>
-            <div id="daftarRiwayat" class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <p class="col-span-full text-center text-gray-400 py-10">Belum ada riwayat desain</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="tab-pengaturan" class="tab-content">
-        <div class="glass p-6">
-            <h2 class="text-xl font-bold mb-6">⚙️ Pengaturan & Bantuan</h2>
+    <!-- Tab: Pengaturan -->
+    <div id="tab-settings" class="tab-content hidden">
+        <div class="glass p-5">
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-cog mr-2 text-purple-400"></i>Pengaturan</h3>
             <div class="space-y-4">
-                <div class="p-4 bg-white/5 rounded-lg">
-                    <h3 class="font-semibold mb-2">🔑 API Key yang Tersimpan</h3>
-                    <p class="text-sm text-gray-400 mb-2">Key tersimpan di browser saja.</p>
-                    <button onclick="hapusAPIKey()" class="btn-gradient btn-secondary text-sm py-2">Hapus Key</button>
+                <div>
+                    <label class="text-sm text-gray-400 mb-1 block">API Key OpenAI</label>
+                    <input type="password" id="settings-api-key" placeholder="Tempel kunci API di sini...">
+                    <p class="text-xs text-gray-500 mt-1">Dapatkan di <a href="https://platform.openai.com/api-keys" target="_blank" class="text-purple-400">platform.openai.com/api-keys</a></p>
                 </div>
-                <div class="p-4 bg-white/5 rounded-lg">
-                    <h3 class="font-semibold mb-2">🔗 Dapatkan API Key</h3>
-                    <div class="space-y-2 text-sm">
-                        <a href="https://platform.openai.com/api-keys" target="_blank" class="text-purple-400 hover:underline">→ OpenAI (DALL-E 3)</a>
-                    </div>
-                </div>
-                <div class="p-4 bg-white/5 rounded-lg">
-                    <h3 class="font-semibold mb-2">📝 Cara Pakai</h3>
-                    <ol class="text-sm text-gray-300 space-y-1 list-decimal list-inside">
-                        <li>Buka link di atas → buat akun → buat API Key</li>
-                        <li>Tempel Key ke kolom API Key di atas</li>
-                        <li>Pilih tipe & gaya desain</li>
-                        <li>Klik "Buka Kamera" atau "Pilih Gambar"</li>
-                        <li>Klik "BUAT DESAIN AI" → tunggu hasilnya</li>
-                    </ol>
+                <div class="text-sm text-gray-400 mt-6">
+                    <p><strong>Biaya per pemakaian:</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Gambar 1024×1024 = $0.04 (~Rp 650)</li>
+                        <li>Gambar 1792×1024 = $0.08 (~Rp 1.300)</li>
+                    </ul>
+                    <p class="mt-3 text-yellow-400">⚠️ Jangan bagikan API Key ke siapa pun.</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-let tipeDesain = 'bangunan';
-let gayaDesain = 'minimalis';
-let fotoAsliBase64 = null;
-let hasilUrlGambar = null;
-let riwayatDesain = JSON.parse(localStorage.getItem('aiDesainRiwayat') || '[]');
-const HARGA_PER_M2 = { ekonomis: 2500000, standar: 3500000, menengah: 5000000, mewah: 8000000 };
+    <script>
+        // === Variabel Global ===
+        let selectedImageData = null;
+        let stream = null;
+        let history = JSON.parse(localStorage.getItem('ai-design-history') || '[]');
 
-document.addEventListener('DOMContentLoaded', () => {
-    const keyTersimpan = localStorage.getItem('aiDesainAPIKey');
-    if(keyTersimpan) document.getElementById('apiKey').value = keyTersimpan;
-    tampilkanRiwayat();
-    document.getElementById('luasBangunan').addEventListener('input', hitungEstimasi);
-    document.getElementById('kualitasBangunan').addEventListener('change', hitungEstimasi);
-});
-
-function bukaTab(namaTab) {
-    document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('aktif'));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('aktif'));
-    event.target.closest('.tab-btn').classList.add('aktif');
-    document.getElementById(`tab-${namaTab}`).classList.add('aktif');
-    if(namaTab === 'riwayat') tampilkanRiwayat();
-}
-
-document.querySelectorAll('.card-option[data-tipe]').forEach(card => {
-    card.addEventListener('click', () => {
-        document.querySelectorAll('.card-option[data-tipe]').forEach(c => c.classList.remove('aktif'));
-        card.classList.add('aktif');
-        tipeDesain = card.dataset.tipe;
-    });
-});
-
-function pilihGaya(gaya) {
-    document.querySelectorAll('.card-option[data-gaya]').forEach(c => c.classList.remove('aktif'));
-    document.querySelector(`[data-gaya="${gaya}"]`).classList.add('aktif');
-    gayaDesain = gaya;
-}
-
-function hitungEstimasi() {
-    const luas = parseFloat(document.getElementById('luasBangunan').value) || 0;
-    const kualitas = document.getElementById('kualitasBangunan').value;
-    if(luas > 0 && kualitas) {
-        const total = luas * HARGA_PER_M2[kualitas];
-        document.getElementById('estimasiBiayaBox').classList.remove('hidden');
-        document.getElementById('estimasiBiayaNilai').textContent = 'Rp ' + total.toLocaleString('id-ID');
-    } else {
-        document.getElementById('estimasiBiayaBox').classList.add('hidden');
-    }
-}
-
-const video = document.getElementById('video');
-const btnBukaKamera = document.getElementById('btnBukaKamera');
-const btnAmbilFoto = document.getElementById('btnAmbilFoto');
-const btnUpload = document.getElementById('btnUpload');
-const fileUpload = document.getElementById('fileUpload');
-const imgPreview = document.getElementById('imgPreview');
-const previewFoto = document.getElementById('previewFoto');
-const btnGenerate = document.getElementById('btnGenerate');
-const btnHapusFoto = document.getElementById('btnHapusFoto');
-
-let streamKamera = null;
-
-btnBukaKamera.addEventListener('click', async () => {
-    try {
-        streamKamera = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
-        });
-        video.srcObject = streamKamera;
-        btnAmbilFoto.disabled = false;
-        btnBukaKamera.textContent = '🔄 Kamera Aktif';
-    } catch (err) {
-        alert('⚠️ Tidak bisa akses kamera.\n\nSolusi:\n1. Klik ikon 🔒 gembok di sebelah alamat web\n2. Izinkan Kamera\n3. Muat ulang halaman\n\nAtau gunakan "Pilih Gambar" untuk upload foto dari galeri.');
-        console.error(err);
-    }
-});
-
-btnAmbilFoto.addEventListener('click', () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = video.videoWidth || 640;
-    canvas.height = video.videoHeight || 480;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    fotoAsliBase64 = canvas.toDataURL('image/png');
-    imgPreview.src = fotoAsliBase64;
-    previewFoto.classList.remove('hidden');
-    btnGenerate.disabled = false;
-    if(streamKamera) {
-        streamKamera.getTracks().forEach(t => t.stop());
-        video.srcObject = null;
-        btnAmbilFoto.disabled = true;
-        btnBukaKamera.textContent = '📷 Buka Kamera';
-    }
-});
-
-btnUpload.addEventListener('click', () => fileUpload.click());
-fileUpload.addEventListener('change', e => {
-    const file = e.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-        fotoAsliBase64 = ev.target.result;
-        imgPreview.src = fotoAsliBase64;
-        previewFoto.classList.remove('hidden');
-        btnGenerate.disabled = false;
-    };
-    reader.readAsDataURL(file);
-});
-
-btnHapusFoto.addEventListener('click', () => {
-    fotoAsliBase64 = null;
-    fileUpload.value = '';
-    previewFoto.classList.add('hidden');
-    btnGenerate.disabled = true;
-});
-
-const slider = document.getElementById('slider');
-const beforeWrap = document.querySelector('.img-before-wrap');
-let aktifSlider = false;
-
-function geserSlider(e) {
-    if(!aktifSlider) return;
-    const rect = slider.parentElement.getBoundingClientRect();
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-    if(!clientX) return;
-    let x = clientX - rect.left;
-    x = Math.max(0, Math.min(rect.width, x));
-    const persen = (x / rect.width) * 100;
-    beforeWrap.style.width = persen + '%';
-    slider.style.left = persen + '%';
-}
-
-slider.addEventListener('mousedown', () => { aktifSlider = true; });
-document.addEventListener('mousemove', geserSlider);
-document.addEventListener('mouseup', () => { aktifSlider = false; });
-slider.addEventListener('touchstart', () => { aktifSlider = true; });
-document.addEventListener('touchmove', geserSlider);
-document.addEventListener('touchend', () => { aktifSlider = false; });
-
-const PROMPT_DASAR = {
-    bangunan: {
-        minimalis: 'desain fasad bangunan minimalis, garis bersih, warna netral, pencahayaan alami, arsitektur modern sederhana, foto realistis resolusi tinggi',
-        modern: 'desain fasad bangunan modern, bentuk geometris, kaca luas, atap datar, pencahayaan dramatis, arsitektur profesional, foto realistis',
-        klasik: 'desain fasad bangunan klasik, ornamen elegan, kolom simetris, warna hangat, detail ukiran, bangunan mewah, foto realistis',
-        skandinavia: 'desain fasad gaya Skandinavia, kayu terang, warna putih & krem, jendela besar, sederhana fungsional, pencahayaan lembut, foto realistis',
-        industrial: 'desain fasad industrial, beton terekspos, besi hitam, bata merah, jendela besar, garis tegas, estetika pabrik, foto realistis',
-        tropis: 'desain fasad tropis, ventilasi terbuka, atap miring, tanaman hijau terintegrasi, kayu alami, pencahayaan alami, segar & nyaman, foto realistis'
-    },
-    interior: {
-        minimalis: 'desain interior minimalis, ruang bersih, furnitur sederhana, warna netral, pencahayaan lembut, ruang lapang, foto realistis resolusi tinggi',
-        modern: 'desain interior modern, furnitur desain, pencahayaan artistik, material kaca & logam, warna kontras, tampak mewah, foto realistis',
-        klasik: 'desain interior klasik, furnitur ukir, kain mewah, ornamen emas, pencahayaan hangat, langit-langit tinggi, elegan & mewah, foto realistis',
-        skandinavia: 'desain interior Skandinavia, kayu terang, putih & abu-abu, tekstur alami, tanaman hias, pencahayaan hangat, hangat & fungsional, foto realistis',
-        industrial: 'desain interior industrial, beton terekspos, pipa terbuka, besi hitam, kayu kasar, pencahayaan gantung, estetika pabrik, foto realistis',
-        tropis: 'desain interior tropis, kayu alami, tanaman dalam ruangan, ventilasi terbuka, warna bumi, pencahayaan alami, segar & alami, foto realistis'
-    },
-    taman: {
-        minimalis: 'desain taman minimalis, rumput rapi, batu alam, tanaman teratur, jalur lurus, pencahayaan taman, sederhana elegan, foto realistis',
-        modern: 'desain taman modern, bentuk geometris, kolam air terjun, lampu LED, tanaman kontemporer, paving batu, estetika futuristik, foto realistis',
-        klasik: 'desain taman klasik, simetris, tanaman dipangkas rapi, air mancur, patung, jalur batu melengkung, taman mewah, foto realistis',
-        skandinavia: 'desain taman gaya Skandinavia, kayu alami, tanaman tahan dingin, batu alam, pencahayaan hangat, sederhana alami, foto realistis',
-        industrial: 'desain taman industrial, beton & besi, tanaman tahan banting, batu besar, lampu sorot, estetika urban, foto realistis',
-        tropis: 'desain taman tropis, tanaman rimbun, palem, kolam ikan, batu alam, jalur batu, gazebo kayu, pencahayaan hangat, segar tropis, foto realistis'
-    },
-    kolam: {
-        minimalis: 'desain kolam minimalis, bentuk geometris, air jernih biru, tepi batu putih, lantai keramik biru, pencahayaan bawah air, bersih modern, foto realistis',
-        modern: 'desain kolam renang modern, bentuk elegan, air biru jernih, tepi kayu komposit, lampu bawah air, area deck luas, mewah & bersih, foto realistis',
-        klasik: 'desain kolam klasik, tepi batu alam, bentuk organik, tanaman di sekeliling, air jernih, estetika alami & mewah, foto realistis',
-        skandinavia: 'desain kolam gaya Skandinavia, kayu terang, tepi batu putih, bentuk sederhana, air jernih, pencahayaan lembut, bersih & cerah, foto realistis',
-        industrial: 'desain kolam industrial, beton terekspos, tepi besi hitam, bentuk kotak, air jernih, estetika urban & tegas, foto realistis',
-        tropis: 'desain kolam tropis, air jernih biru, tepi batu alam, tanaman palem di sekeliling, lampu taman, area deck kayu, suasana resor mewah, foto realistis'
-    }
-};
-
-const TEKS_PENCAHAYAAN = {
-    alami: 'pencahayaan alami siang hari, langit cerah, cahaya matahari lembut',
-    hangat: 'pencahayaan sore hari, cahaya matahari hangat keemasan, bayangan lembut',
-    malam: 'pencahayaan malam, lampu buatan hangat, suasana nyaman & mewah',
-    studio: 'pencahayaan studio profesional, cahaya merata, detail tajam, kualitas foto arsitektur'
-};
-
-const TEKS_DETAIL = {
-    rendah: 'detail standar, resolusi sedang',
-    sedang: 'detail tinggi, resolusi tinggi, tekstur jelas',
-    tinggi: 'ultra realistis, foto profesional, resolusi sangat tinggi, tekstur material terlihat jelas, pencahayaan sempurna'
-};
-
-const loadingBox = document.getElementById('loadingBox');
-const hasilBox = document.getElementById('hasilBox');
-const imgBefore = document.getElementById('imgBefore');
-const imgAfter = document.getElementById('imgAfter');
-const rekomendasiTeks = document.getElementById('rekomendasiTeks');
-
-btnGenerate.addEventListener('click', async () => {
-    const apiKey = document.getElementById('apiKey').value.trim();
-    const promptDesain = document.getElementById('promptDesain').value.trim();
-    const pencahayaan = document.getElementById('pencahayaan').value;
-    const detailLevel = document.getElementById('detailLevel').value;
-    const rasio = document.getElementById('rasioGambar').value;
-    const provider = document.getElementById('aiProvider').value;
-
-    if(!apiKey) {
-        alert('⚠️ Masukkan API Key terlebih dahulu di bagian Pengaturan AI!');
-        document.getElementById('apiKey').focus();
-        return;
-    }
-    if(!fotoAsliBase64) {
-        alert('⚠️ Ambil foto atau pilih gambar dari galeri terlebih dahulu!');
-        return;
-    }
-
-    localStorage.setItem('aiDesainAPIKey', apiKey);
-    loadingBox.classList.remove('hidden');
-    hasilBox.classList.add('hidden');
-    btnGenerate.disabled = true;
-
-    let promptAkhir = PROMPT_DASAR[tipeDesain][gayaDesain];
-    promptAkhir += `, ${TEKS_PENCAHAYAAN[pencahayaan]}`;
-    promptAkhir += `, ${TEKS_DETAIL[detailLevel]}`;
-    if(promptDesain) promptAkhir += `. ${promptDesain}`;
-
-    try {
-        let hasilUrl = '';
-        if(provider === 'openai') {
-            const res = await fetch('https://api.openai.com/v1/images/generations', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    prompt: promptAkhir,
-                    n: 1,
-                    size: rasio,
-                    response_format: 'url'
-                })
+        // === Tab Switching ===
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+                document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+                if (tabId === 'history') renderHistory();
             });
-            const data = await res.json();
-            if(!res.ok) throw new Error(data.error?.message || 'Gagal membuat gambar');
-            hasilUrl = data.data[0].url;
-        } else {
-            throw new Error('🔧 Pilih OpenAI untuk saat ini. Penyedia lain sedang disiapkan.');
-        }
-
-        hasilUrlGambar = hasilUrl;
-        imgBefore.src = fotoAsliBase64;
-        imgAfter.src = hasilUrl;
-        beforeWrap.style.width = '50%';
-        slider.style.left = '50%';
-
-        document.getElementById('tipeBadge').textContent = tipeDesain.charAt(0).toUpperCase() + tipeDesain.slice(1);
-        document.getElementById('infoTipe').textContent = tipeDesain.charAt(0).toUpperCase() + tipeDesain.slice(1);
-        document.getElementById('infoGaya').textContent = gayaDesain.charAt(0).toUpperCase() + gayaDesain.slice(1);
-        document.getElementById('infoCahaya').textContent = pencahayaan.charAt(0).toUpperCase() + pencahayaan.slice(1);
-        document.getElementById('infoDetail').textContent = detailLevel.charAt(0).toUpperCase() + detailLevel.slice(1);
-
-        rekomendasiTeks.textContent = buatRekomendasi(tipeDesain, gayaDesain);
-
-        const luas = parseFloat(document.getElementById('luasBangunan').value) || 0;
-        const kualitas = document.getElementById('kualitasBangunan').value;
-        if(luas > 0 && kualitas) {
-            const total = luas * HARGA_PER_M2[kualitas];
-            document.getElementById('estimasiHasilBox').classList.remove('hidden');
-            document.getElementById('hasilLuas').textContent = luas;
-            document.getElementById('hasilKualitas').textContent = kualitas.charAt(0).toUpperCase() + kualitas.slice(1);
-            document.getElementById('hasilTotalBiaya').textContent = 'Rp ' + total.toLocaleString('id-ID');
-        } else {
-            document.getElementById('estimasiHasilBox').classList.add('hidden');
-        }
-
-        document.getElementById('btnDownload').href = hasilUrl;
-        document.getElementById('btnShareWA').onclick = () => {
-            const teks = `Hasil Desain ${gayaDesain}:\n${promptAkhir}\n\nLihat hasilnya: ${hasilUrl}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(teks)}`, '_blank');
-        };
-        document.getElementById('btnBuatUlang').onclick = () => {
-            fotoAsliBase64 = null;
-            fileUpload.value = '';
-            previewFoto.classList.add('hidden');
-            hasilBox.classList.add('hidden');
-            btnGenerate.disabled = true;
-        };
-
-        riwayatDesain.unshift({
-            id: Date.now(),
-            tanggal: new Date().toLocaleString('id-ID'),
-            tipe: tipeDesain,
-            gaya: gayaDesain,
-            prompt: promptAkhir,
-            url: hasilUrl
         });
-        if(riwayatDesain.length > 50) riwayatDesain.pop();
-        localStorage.setItem('aiDesainRiwayat', JSON.stringify(riwayatDesain));
 
-        loadingBox.classList.add('hidden');
-        hasilBox.classList.remove('hidden');
-    } catch(err) {
-        loadingBox.classList.add('hidden');
-        alert(`❌ Gagal:\n${err.message}\n\n💡 Pastikan API Key benar & masih ada kredit di akun OpenAI.`);
-        console.error(err);
-    }
-});
+        // === Pilih Tipe Desain ===
+        document.querySelectorAll('.card-option').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.card-option').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+            });
+        });
 
-function buatRekomendasi(tipe, gaya) {
-    const r = {
-        bangunan: {
-            minimalis: "✅ Dinding: Cat putih, krem, atau abu-abu muda\n✅ Lantai: Keramik polos atau kayu cokelat muda\n✅ Atap: Datar atau kemiringan rendah\n✅ Pencahayaan: LED tersembunyi, cahaya alami maksimal",
-            modern: "✅ Fasad: Kaca luas + bingkai aluminium\n✅ Dinding: Abu-abu gelap atau aksen batu alam\n✅ Lantai: Granit atau keramik besar mengkilap\n✅ Pencahayaan: Lampu sorot luar & lampu gantung desain",
-            klasik: "✅ Dinding: Cat krem atau kuning gading\n✅ Detail: Ornamen sederhana, tiang simetris\n✅ Lantai: Ubin motif atau marmer\n✅ Pagar: Tembok hias atau besi tempa",
-            skandinavia: "✅ Dinding: Putih atau krem terang\n✅ Aksen: Kayu pinus pada pintu & jendela\n✅ Lantai: Kayu terang\n✅ Jendela: Ukuran besar untuk cahaya maksimal",
-            industrial: "✅ Dinding: Beton terekspos atau bata merah\n✅ Bingkai: Besi hitam\n✅ Lantai: Beton halus atau kayu kasar\n✅ Pencahayaan: Lampu gantung logam terbuka",
-            tropis: "✅ Dinding: Warna krem atau warna tanah\n✅ Ventilasi: Terbuka, jendela lebar\n✅ Atap: Miring, tahan air\n✅ Lantai: Keramik anti-selip atau kayu keras"
-        },
-        interior: {
-            minimalis: "✅ Dinding: Putih atau abu-abu sangat muda\n✅ Furnitur: Bentuk sederhana, warna netral\n✅ Lantai: Kayu terang atau keramik polos\n✅ Dekorasi: Sedikit, tanaman hijau saja",
-            modern: "✅ Dinding: Putih + aksen gelap\n✅ Furnitur: Desain tegas, kaca & logam\n✅ Warna: Hitam, putih, abu-abu, aksen warna cerah\n✅ Pencahayaan: Lampu LED strip & lampu gantung unik",
-            klasik: "✅ Dinding: Warna krem atau gading\n✅ Furnitur: Kayu ukir, kain beludru\n✅ Pencahayaan: Lampu gantung kristal\n✅ Lantai: Parket kayu atau marmer",
-            skandinavia: "✅ Dinding: Putih atau krem pucat\n✅ Furnitur: Kayu terang, bentuk sederhana\n✅ Tekstur: Kain wol, karpet bulu\n✅ Tanaman: Banyak tanaman hijau dalam ruangan",
-            industrial: "✅ Dinding: Beton terekspos atau bata\n✅ Furnitur: Kayu tua + besi hitam\n✅ Lantai: Beton atau kayu keras\n✅ Pencahayaan: Lampu bohlam terbuka",
-            tropis: "✅ Dinding: Warna krem, cokelat muda, hijau lembut\n✅ Furnitur: Kayu jati atau rotan\n✅ Jendela: Terb
+        // === Pilih Gaya ===
+        document.querySelectorAll('.style-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active', 'bg-purple-600'));
+                btn.classList.add('active', 'bg-purple-600');
+            });
+        });
+
+        // === Sinkronisasi API Key ===
+        const apiKeyInput = document.getElementById('api-key');
+        const settingsApiKeyInput = document.getElementById('settings-api-key');
+        
+        apiKeyInput.value = localStorage.getItem('openai-api-key') || '';
+        settingsApiKeyInput.value = localStorage.getItem('openai-api-key') || '';
+
+        apiKeyInput.addEventListener('input', () => {
+            localStorage.setItem('openai-api-key', apiKeyInput.value);
+            settingsApiKeyInput.value = apiKeyInput.value;
+            checkCanGenerate();
+        });
+        settingsApiKeyInput.addEventListener('input', () => {
+            localStorage.setItem('openai-api-key', settingsApiKeyInput.value);
+            apiKeyInput.value = settingsApiKeyInput.value;
+            checkCanGenerate();
+        });
+
+        // === Kamera ===
+        const cameraFeed = document.getElementById('camera-feed');
+        const btnOpenCamera = document.getElementById('btn-open-camera');
+        const btnCapture = document.getElementById('btn-capture');
+
+        btnOpenCamera.addEventListener('click', async () => {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } } 
+                });
+                cameraFeed.srcObject = stream;
+                btnCapture.disabled = false;
+                btnOpenCamera.textContent = '🔄 Kamera Aktif';
+            } catch (err) {
+                alert('Tidak bisa membuka kamera. Pastikan memberi izin akses kamera di pengaturan browser.\n\nPakai cara "Pilih Gambar" sebagai alternatif.');
+                console.error(err);
+            }
+        });
+
+        btnCapture.addEventListener('click', () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = cameraFeed.videoWidth;
+            canvas.height = cameraFeed.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(cameraFeed, 0, 0);
+            selectedImageData = canvas.toDataURL('image/jpeg', 0.85);
+            showPreview(selectedImageData);
+            if (stream) stream.getTracks().forEach(t => t.stop());
+            stream = null;
+            btnCapture.disabled = true;
+            btnOpenCamera.textContent = '📷 Buka Kamera';
+        });
+
+        // === Upload Gambar ===
+        const btnUpload = document.getElementById('btn-upload');
+        const fileInput = document.getElementById('file-input');
+
+        btnUpload.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', e => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = ev => {
+                selectedImageData = ev.target.result;
+                showPreview(selectedImageData);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Tarik & Lepas
+        const uploadArea = document.getElementById('upload-area');
+        uploadArea.addEventListener('dragover', e => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#8b5cf6';
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '';
+        });
+        uploadArea.addEventListener('drop', e => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '';
+            const file = e.dataTransfer.files[0];
+            if (!file || !file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = ev => {
+                selectedImageData = ev.target.result;
+                showPreview(selectedImageData);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // === Tampilkan Preview ===
+        function showPreview(src) {
+            document.getElementById('preview-section').classList.remove('hidden');
+            document.getElementById('preview-image').src = src;
+            document.getElementById('before-image').src = src;
+            checkCanGenerate();
+        }
+
+        document.getElementById('btn-remove-image').addEventListener('click', () => {
+            selectedImageData = null;
+            fileInput.value = '';
+            document.getElementById('preview-section').classList.add('hidden');
+            document.getElementById('result-section').classList.add('hidden');
+            checkCanGenerate();
+        });
+
+        // === Cek Bisa Buat atau Tidak ===
+        function checkCanGenerate() {
+            const hasKey = !!localStorage.getItem('openai-api-key');
+            const hasImage = !!selectedImageData;
+            document.getElementById('btn-generate').disabled = !(hasKey && hasImage);
+        }
+
+        // === Susun Prompt ===
+        function buildPrompt() {
+            const typeEl = document.querySelector('.card-option.active');
+            const typeText = typeEl ? typeEl.querySelector('div:first-child').textContent : '';
+            const styleEl = document.querySelector('.style-btn.active');
+            const styleText = styleEl ? styleEl.textContent.trim() : 'Minimalis';
+            const lighting = document.getElementById('lighting').value;
+            const extra = document.getElementById('extra-prompt').value.trim();
+
+            const lightingDesc = {
+                alami: 'pencahayaan alami yang terang di siang hari',
+                sore: 'cahaya matahari sore yang hangat dan lembut',
+                malam: 'pencahayaan malam yang indah dengan lampu taman',
+                studio: 'pencahayaan studio yang merata dan terang'
+            };
+
+            let prompt = `Ubah foto ini menjadi desain ${typeText.toLowerCase()} gaya arsitektur ${styleText}. Tampilkan hasil akhir yang realistis, profesional, detail tinggi, ${lightingDesc[lighting]}.`;
+            if (extra) prompt += ` Tambahan: ${extra}`;
+            prompt += ' — Hasil harus terlihat nyata, dapat dibangun, rapi, estetis, resolusi tinggi.';
+            return prompt;
+        }
+
+        // === Buat Desain ===
+        document.getElementById('btn-generate').addEventListener('click', async () => {
+            const apiKey = localStorage.getItem('openai-api-key');
+            if (!apiKey || !selectedImageData) {
+                alert('Masukkan API Key dan pilih gambar terlebih dahulu.');
+                return;
+            }
+
+            document.getElementById('loading-section').classList.remove('hidden');
+            document.getElementById('result-section').classList.add('hidden');
+            document.getElementById('btn-generate').disabled = true;
+
+            try {
+                // Potong prefix data:image untuk dikirim
+                const base64Image = selectedImageData.split(',')[1];
+                const prompt = buildPrompt();
+
+                const response = await fetch('https://api.openai.com/v1/images/generations', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: 'dall-e-3',
+                        prompt: prompt,
+                        n: 1,
+                        size: '1024x1024',
+                        response_format: 'url'
+                    })
+                });
+
+                const data = await response.json();
+                if (data.error) throw new Error(data.error.message);
+                if (!data.data || !data.data[0]) throw new Error('Tidak ada respons dari AI');
+
+                const resultUrl = data.data[0].url;
+                document.getElementById('after-image').src = resultUrl;
+                document.getElementById('loading-section').classList.add('hidden');
+                document.getElementById('result-section').classList.remove('hidden');
+
+                // Simpan ke riwayat
+                const item = {
+                    id: Date.now(),
+                    date: new Date().toLocaleString('id-ID'),
+                    prompt: prompt,
+                    before: selectedImageData,
+                    after: resultUrl
+                };
+                history.unshift(item);
+                if (history.length > 20) history = history.slice(0, 20);
+                localStorage.setItem('ai-design-history', JSON.stringify(history));
+
+                // Unduh
+                document.getElementById('btn-download').href = resultUrl;
+
+                // Bagikan WA
+                document.getElementById('btn-share-wa').onclick = () => {
+                    const text = 'Hasil desain AI:\n' + prompt + '\n\nLihat hasilnya: ' + resultUrl;
+                    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+                };
+
+                // Slider perbandingan
+                initSlider();
+
+            } catch (err) {
+                document.getElementById('loading-section').classList.add('hidden');
+                alert('Error: ' + err.message + '\n\nPastikan API Key benar dan saldo masih ada.');
+                console.error(err);
+            } finally {
+                checkCanGenerate();
+            }
+        });
+
+        // === Slider Bandingkan Sebelum-Sesudah ===
+        function initSlider() {
+            const wrapper = document.getElementById('comparison-wrapper');
+            const beforeWrapper = document.getElementById('before-wrapper');
+            const slider = document.getElementById('slider-handle');
+            let isDragging = false;
+
+            const setPosition = (x) => {
+                const rect = wrapper.getBoundingClientRect();
+                let pct = ((x - rect.left) / rect.width) * 100;
+                pct = Math.max(0, Math.min(100, pct));
+                beforeWrapper.style.width = pct + '%';
+                slider.style.left = pct + '%';
+            };
+
+            slider.addEventListener('mousedown', () => isDragging = true);
+            document.addEventListener('mouseup', () => isDragging = false);
+            document.addEventListener('mousemove', e => {
+                if (!isDragging) return;
+                setPosition(e.clientX);
+            });
+            // Sentuhan HP
+            slider.addEventListener('touchstart', () => isDragging = true);
+            document.addEventListener('touchend', () => isDragging = false);
+            document.addEventListener('touchmove', e => {
+                if (!isDragging) return;
+                setPosition(e.touches[0].clientX);
+            });
+            setPosition(wrapper.getBoundingClientRect().right / 2);
+        }
+
+        // === Desain Baru ===
+        document.getElementById('btn-new').addEventListener('click', () => {
+            selectedImageData = null;
+            fileInput.value = '';
+            document.getElementById('preview-section').classList.add('hidden');
+            document.getElementById('result-section').classList.add('hidden');
+            checkCanGenerate();
+        });
+
+        // === Riwayat ===
+        function renderHistory() {
+            const list = document.getElementById('history-list');
+            if (history.length === 0) {
+                list.innerHTML = '<p class="text-gray-400 text-center py-4">Belum ada riwayat desain.</p>';
+                return;
+            }
+            list.innerHTML = history.map(item => `
+                <div class="history-item">
+                    <p class="text-xs text-gray-400 mb-2">${item.date}</p>
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <img src="${item.before}" class="w-full rounded-lg">
+                        <img src="${item.after}" class="w-full rounded-lg">
+                    </div>
+                    <p class="text-xs text-gray-300 line-clamp-2">${item.prompt}</p>
+                    <a href="${item.after}" target="_blank" class="text-purple-400 text-xs mt-2 inline-block">
+                        <i class="fa fa-external-link"></i> Buka Hasil
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('btn-clear-history').addEventListener('click', () => {
+            if (confirm('Hapus semua riwayat?')) {
+                history = [];
+                localStorage.removeItem('ai-design-history');
+                renderHistory();
+            }
+        });
+
+        // Inisialisasi
+        checkCanGenerate();
+    </script>
+</body>
+</html>
+

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Desain Realistis — Gratis & Tanpa API Key</title>
+    <title>AI Desain Realistis — Gratis & Mudah</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
@@ -23,11 +23,12 @@
             background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 14px 24px;
             border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1.05rem;
         }
         .btn-gradient:hover {
             transform: translateY(-2px);
@@ -93,56 +94,50 @@
             border-radius: 12px;
             margin-top: 12px;
         }
-        .spinner {
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top: 3px solid #10b981;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
         .hidden { display: none !important; }
         .info-box {
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 16px;
+            padding: 14px;
+            margin-bottom: 20px;
+        }
+        .step {
+            display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px;
+        }
+        .step-num {
+            background: #10b981; width: 28px; height: 28px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;
         }
     </style>
 </head>
 <body class="px-4 py-6 max-w-6xl mx-auto">
     <header class="text-center mb-8">
         <h1 class="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-            <i class="fa fa-magic mr-2"></i>AI Desain Realistis — Versi Gratis
+            <i class="fa fa-magic mr-2"></i>AI Desain Realistis
         </h1>
-        <p class="text-gray-400 mt-2">Tidak perlu API Key — Langsung pakai!</p>
-        <div class="info-box mt-4 text-sm text-green-300">
-            <i class="fa fa-info-circle mr-1"></i>
-            Menggunakan layanan gratis: hanya pilih gambar → ketik permintaan → dapat hasil
+        <p class="text-gray-400 mt-2">Gratis • Tanpa API Key • Tanpa Daftar</p>
+        <div class="info-box mt-4 text-sm text-green-300 text-left">
+            <i class="fa fa-check-circle mr-2"></i>
+            <strong>Cara kerja:</strong> Pilih pengaturan → klik tombol → halaman AI terbuka otomatis → upload foto → dapat hasil!
         </div>
     </header>
 
     <!-- Tab Menu -->
     <div class="flex justify-center gap-2 mb-8">
-        <button class="tab-btn active" data-tab="create">
-            <i class="fa fa-paint-brush mr-1"></i> Buat Desain
+        <button class="tab-btn active" data-tab="atur">
+            <i class="fa fa-sliders mr-1"></i> Atur Desain
         </button>
-        <button class="tab-btn" data-tab="bantuan">
-            <i class="fa fa-question-circle mr-1"></i> Bantuan
+        <button class="tab-btn" data-tab="panduan">
+            <i class="fa fa-book mr-1"></i> Cara Pakai
         </button>
     </div>
 
-    <!-- Tab: Buat Desain -->
-    <div id="tab-create" class="tab-content">
-        <!-- Pilih Tipe Desain -->
+    <!-- Tab: Atur Desain -->
+    <div id="tab-atur" class="tab-content">
+        <!-- Tipe Desain -->
         <div class="glass p-5 mb-6">
-            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-th-large mr-2 text-green-400"></i>Pilih Tipe Desain</h3>
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-th-large mr-2 text-green-400"></i>1. Pilih Tipe Desain</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div class="card-option active" data-type="bangunan">
                     <i class="fa fa-building text-2xl text-green-400 mb-2"></i>
@@ -167,159 +162,118 @@
             </div>
         </div>
 
-        <!-- Gaya Desain -->
+        <!-- Gaya -->
         <div class="glass p-5 mb-6">
-            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-paint-brush mr-2 text-yellow-400"></i>Gaya Arsitektur</h3>
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-paint-brush mr-2 text-yellow-400"></i>2. Pilih Gaya Arsitektur</h3>
             <div class="flex flex-wrap gap-2">
                 <button class="btn-secondary style-btn active" data-style="minimalis">Minimalis</button>
                 <button class="btn-secondary style-btn" data-style="modern">Modern</button>
                 <button class="btn-secondary style-btn" data-style="klasik">Klasik</button>
                 <button class="btn-secondary style-btn" data-style="tropis">Tropis</button>
                 <button class="btn-secondary style-btn" data-style="skandinavia">Skandinavia</button>
+                <button class="btn-secondary style-btn" data-style="industrial">Industrial</button>
             </div>
         </div>
 
-        <!-- Upload / Kamera -->
+        <!-- Pencahayaan & Detail -->
         <div class="glass p-5 mb-6">
-            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-camera mr-2 text-green-400"></i>Ambil Foto atau Pilih Gambar</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Kamera -->
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-sun-o mr-2 text-orange-400"></i>3. Suasana & Detail</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <video id="camera-feed" autoplay playsinline muted class="w-full rounded-xl bg-black aspect-video"></video>
-                    <div class="flex gap-3 mt-3">
-                        <button id="btn-open-camera" class="btn-secondary flex-1">
-                            <i class="fa fa-camera mr-1"></i> Buka Kamera
-                        </button>
-                        <button id="btn-capture" class="btn-gradient flex-1" disabled>
-                            <i class="fa fa-check mr-1"></i> Ambil Foto
-                        </button>
-                    </div>
+                    <label class="text-sm text-gray-400 mb-1 block">Pencahayaan</label>
+                    <select id="lighting">
+                        <option value="alami" selected>☀️ Cahaya Alami Siang</option>
+                        <option value="sore">🌅 Cahaya Sore Hangat</option>
+                        <option value="malam">🌙 Pencahayaan Malam</option>
+                    </select>
                 </div>
-
-                <!-- Upload -->
-                <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-600 rounded-xl p-6 min-h-[240px]" id="upload-area">
-                    <i class="fa fa-upload text-4xl text-gray-500 mb-3"></i>
-                    <p class="text-gray-400 mb-4 text-center">Atau pilih gambar dari HP</p>
-                    <button id="btn-upload" class="btn-gradient">
-                        <i class="fa fa-folder-open mr-1"></i> Pilih Gambar
-                    </button>
-                    <input type="file" id="file-input" accept="image/*" class="hidden">
+                <div>
+                    <label class="text-sm text-gray-400 mb-1 block">Kualitas</label>
+                    <select id="quality">
+                        <option value="standar">Standar — Cepat</option>
+                        <option value="tinggi" selected>Tinggi — Detail Lengkap</option>
+                    </select>
                 </div>
             </div>
-
-            <!-- Preview -->
-            <div id="preview-section" class="mt-4 hidden">
-                <p class="text-sm text-gray-400 mb-2">Gambar yang dipilih:</p>
-                <img id="preview-image" class="preview-img" alt="Preview">
-                <button id="btn-remove-image" class="text-red-400 text-sm mt-2">
-                    <i class="fa fa-times"></i> Hapus Gambar
-                </button>
+            <div>
+                <label class="text-sm text-gray-400 mb-1 block">Keterangan Tambahan (Opsional)</label>
+                <textarea id="extra" rows="2" placeholder="Contoh: cat dinding putih, atap miring, pagar batu, taman bunga..."></textarea>
             </div>
         </div>
 
-        <!-- Keterangan Tambahan -->
+        <!-- Hasil Teks -->
         <div class="glass p-5 mb-6">
-            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-pencil mr-2 text-blue-400"></i>Keterangan Tambahan</h3>
-            <textarea id="deskripsi" rows="3" class="w-full" placeholder="Contoh: rumah 2 lantai, cat warna krem, atap miring, ada taman depan..."></textarea>
+            <h3 class="font-semibold text-lg mb-3"><i class="fa fa-file-text-o mr-2 text-blue-400"></i>4. Teks Permintaan AI</h3>
+            <p class="text-xs text-gray-400 mb-2">Teks ini akan otomatis disalin — tinggal tempel:</p>
+            <textarea id="prompt-hasil" rows="4" readonly class="bg-black/30 border-green-500/30 text-green-300 text-sm"></textarea>
+            <button id="btn-salin" class="btn-secondary mt-3 text-sm">
+                <i class="fa fa-copy"></i> Salin Teks
+            </button>
         </div>
 
-        <!-- Tombol Buat Desain -->
-        <button id="btn-generate" class="btn-gradient w-full text-lg py-4 mb-6" disabled>
-            <i class="fa fa-magic mr-2"></i> BUAT DESAIN GRATIS
+        <!-- Tombol Buka AI -->
+        <button id="btn-buka-ai" class="btn-gradient w-full text-lg py-5 mb-6">
+            <i class="fa fa-external-link mr-2"></i>BUKA HALAMAN AI GRATIS
         </button>
 
-        <!-- Loading -->
-        <div id="loading-section" class="hidden">
-            <div class="spinner"></div>
-            <p class="text-center text-gray-400 mt-3">Sedang memproses... Mohon tunggu 15–30 detik</p>
-        </div>
-
-        <!-- Hasil -->
-        <div id="result-section" class="hidden">
-            <div class="glass p-5">
-                <h3 class="font-semibold text-lg mb-4 text-green-400">✅ Hasil Desain</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <p class="text-sm text-gray-400 mb-2">Foto Asli:</p>
-                        <img id="before-image" class="w-full rounded-xl" alt="Asli">
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-400 mb-2">Hasil Desain:</p>
-                        <img id="after-image" class="w-full rounded-xl" alt="Hasil">
-                    </div>
-                </div>
-                <div class="flex gap-3 mt-4">
-                    <a id="btn-download" class="btn-gradient flex-1 text-center" download="desain-hasil.jpg">
-                        <i class="fa fa-download mr-1"></i> Simpan Gambar
-                    </a>
-                    <button id="btn-baru" class="btn-secondary flex-1">
-                        <i class="fa fa-refresh mr-1"></i> Desain Baru
-                    </button>
-                </div>
-                <p class="text-xs text-gray-500 mt-4 text-center">
-                    Hasil dibuat oleh layanan AI pihak ketiga • Kualitas tergantung foto asli
-                </p>
+        <div class="glass p-4 text-sm text-gray-400">
+            <p class="font-semibold text-white mb-2">📋 Langkah setelah tombol ditekan:</p>
+            <div class="step">
+                <span class="step-num">1</span>
+                <span>Halaman AI akan terbuka di tab baru</span>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <span>Tempel teks yang sudah disalin ke kolom "Prompt"</span>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <span>Klik tanda gambar/kamera → pilih foto dari HP Anda</span>
+            </div>
+            <div class="step">
+                <span class="step-num">4</span>
+                <span>Klik <strong>"Generate"</strong> → tunggu 10–30 detik</span>
+            </div>
+            <div class="step">
+                <span class="step-num">5</span>
+                <span>Simpan hasilnya ke HP! ✅</span>
             </div>
         </div>
     </div>
 
-    <!-- Tab: Bantuan -->
-    <div id="tab-bantuan" class="tab-content hidden">
+    <!-- Tab: Panduan -->
+    <div id="tab-panduan" class="tab-content hidden">
         <div class="glass p-5">
-            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-info-circle mr-2 text-green-400"></i>Cara Pakai — Versi Gratis</h3>
-            <ol class="space-y-3 text-gray-300">
-                <li class="flex gap-3">
-                    <span class="bg-green-500/20 text-green-300 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0">1</span>
-                    <span>Pilih tipe desain (Bangunan, Interior, Taman, atau Kolam)</span>
-                </li>
-                <li class="flex gap-3">
-                    <span class="bg-green-500/20 text-green-300 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0">2</span>
-                    <span>Pilih gaya arsitektur yang diinginkan</span>
-                </li>
-                <li class="flex gap-3">
-                    <span class="bg-green-500/20 text-green-300 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0">3</span>
-                    <span>Ambil foto pakai kamera atau pilih gambar dari galeri HP</span>
-                </li>
-                <li class="flex gap-3">
-                    <span class="bg-green-500/20 text-green-300 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0">4</span>
-                    <span>Tambahkan keterangan jika ada keinginan khusus</span>
-                </li>
-                <li class="flex gap-3">
-                    <span class="bg-green-500/20 text-green-300 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0">5</span>
-                    <span>Klik <strong>BUAT DESAIN GRATIS</strong> → tunggu hasilnya</span>
-                </li>
-                <li class="flex gap-3">
-                    <span class="bg-green-500/20 text-green-300 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0">6</span>
-                    <span>Simpan hasilnya ke HP atau bagikan</span>
-                </li>
-            </ol>
+            <h3 class="font-semibold text-lg mb-4"><i class="fa fa-question-circle mr-2 text-green-400"></i>Panduan Lengkap</h3>
+            
+            <h4 class="font-semibold text-green-300 mt-4 mb-2">✅ Mengapa versi ini?</h4>
+            <ul class="text-gray-300 text-sm space-y-1 mb-4">
+                <li>• Tidak perlu API Key sama sekali</li>
+                <li>• Tidak perlu daftar akun</li>
+                <li>• Tidak ada biaya, tidak ada saldo habis</li>
+                <li>• Tidak ada pesan error "Failed to fetch"</li>
+                <li>• Bisa dipakai berkali-kali</li>
+            </ul>
 
-            <div class="mt-6 p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
-                <h4 class="font-semibold text-yellow-400 mb-2"><i class="fa fa-lightbulb-o mr-1"></i> Kelebihan Versi Gratis</h4>
-                <ul class="text-sm text-gray-300 space-y-1">
-                    <li>✅ Tidak perlu buat akun apapun</li>
-                    <li>✅ Tidak perlu API Key</li>
-                    <li>✅ Tidak ada biaya</li>
-                    <li>✅ Tidak ada batasan saldo</li>
-                </ul>
-            </div>
+            <h4 class="font-semibold text-yellow-300 mt-6 mb-2">💡 Tips Hasil Lebih Bagus</h4>
+            <ul class="text-gray-300 text-sm space-y-1 mb-4">
+                <li>• Foto diambil dari depan, jangan miring terlalu banyak</li>
+                <li>• Ambil di tempat terang</li>
+                <li>• Tulis keterangan sejelas mungkin</li>
+                <li>• Jika hasil belum pas, ubah sedikit kata-katanya</li>
+            </ul>
 
-            <div class="mt-4 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                <h4 class="font-semibold text-blue-400 mb-2"><i class="fa fa-exclamation-triangle mr-1"></i> Catatan</h4>
-                <ul class="text-sm text-gray-300 space-y-1">
-                    <li>⏳ Waktu pemrosesan bisa agak lama (15–45 detik)</li>
-                    <li>🖼️ Kualitas hasil tergantung kejelasan foto asli</li>
-                    <li>🔁 Jika gagal, coba foto lain atau ulangi proses</li>
-                </ul>
-            </div>
+            <h4 class="font-semibold text-red-300 mt-6 mb-2">⚠️ Halaman AI Tidak Terbuka?</h4>
+            <p class="text-gray-300 text-sm">Jika halaman tidak muncul, periksa bagian atas browser — mungkin diblokir. Klik "Izinkan munculkan jendela" atau matikan pemblokir pop-up.</p>
+            
+            <p class="mt-4 text-sm text-gray-400">Atau buka manual:<br>
+            <code class="bg-black/30 p-2 rounded text-green-300 text-xs break-all">https://huggingface.co/spaces/runwayml/stable-diffusion-img2img</code>
+            </p>
         </div>
     </div>
 
     <script>
-        // === Variabel Global ===
-        let selectedImageData = null;
-        let stream = null;
+        // === Variabel ===
         let selectedType = 'bangunan';
         let selectedStyle = 'minimalis';
 
@@ -340,7 +294,7 @@
                 document.querySelectorAll('.card-option').forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
                 selectedType = card.getAttribute('data-type');
-                checkCanGenerate();
+                updatePrompt();
             });
         });
 
@@ -350,167 +304,63 @@
                 document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 selectedStyle = btn.getAttribute('data-style');
-                checkCanGenerate();
+                updatePrompt();
             });
         });
 
-        // === Kamera ===
-        const cameraFeed = document.getElementById('camera-feed');
-        const btnOpenCamera = document.getElementById('btn-open-camera');
-        const btnCapture = document.getElementById('btn-capture');
+        // === Update Teks Prompt ===
+        function updatePrompt() {
+            const lightingVal = document.getElementById('lighting').value;
+            const lightingText = {
+                alami: 'pencahayaan alami yang terang di siang hari',
+                sore: 'cahaya matahari sore yang hangat dan lembut',
+                malam: 'pencahayaan malam yang indah dengan lampu'
+            }[lightingVal];
 
-        btnOpenCamera.addEventListener('click', async () => {
+            const qualityVal = document.getElementById('quality').value;
+            const qualityText = qualityVal === 'tinggi' ? 'sangat detail, resolusi tinggi, tajam' : 'jelas dan rapi';
+
+            const extra = document.getElementById('extra').value.trim();
+
+            let prompt = `Ubah foto ini menjadi ${selectedType} gaya arsitektur ${selectedStyle}. Tampilkan hasil yang realistis, profesional, dapat dibangun, ${lightingText}, ${qualityText}.`;
+            if (extra) prompt += ` Tambahan: ${extra}`;
+            prompt += ' Terlihat nyata, estetis, rapi.';
+
+            document.getElementById('prompt-hasil').value = prompt;
+        }
+
+        // Event perubahan
+        ['lighting', 'quality', 'extra'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updatePrompt);
+        });
+
+        // Salin Teks
+        document.getElementById('btn-salin').addEventListener('click', async () => {
+            const teks = document.getElementById('prompt-hasil').value;
             try {
-                stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: 'environment', width: { ideal: 1000 }, height: { ideal: 750 } }
-                });
-                cameraFeed.srcObject = stream;
-                btnCapture.disabled = false;
-                btnOpenCamera.innerHTML = '<i class="fa fa-check"></i> Kamera Aktif';
-            } catch (err) {
-                alert('⚠️ Tidak bisa buka kamera.\n\nIzinkan akses kamera di pengaturan browser, atau pakai "Pilih Gambar".');
-                console.error(err);
+                await navigator.clipboard.writeText(teks);
+                alert('✅ Teks sudah disalin! Tempelkan ke kolom Prompt di halaman AI.');
+            } catch {
+                const ta = document.getElementById('prompt-hasil');
+                ta.select();
+                alert('Salin teks di atas secara manual ya.');
             }
         });
 
-        btnCapture.addEventListener('click', () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = cameraFeed.videoWidth || 640;
-            canvas.height = cameraFeed.videoHeight || 480;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(cameraFeed, 0, 0, canvas.width, canvas.height);
-            selectedImageData = canvas.toDataURL('image/jpeg', 0.85);
-            showPreview(selectedImageData);
-            if (stream) {
-                stream.getTracks().forEach(t => t.stop());
-                stream = null;
-            }
-            btnCapture.disabled = true;
-            btnOpenCamera.innerHTML = '<i class="fa fa-camera"></i> Buka Kamera';
-        });
-
-        // === Upload Gambar ===
-        const btnUpload = document.getElementById('btn-upload');
-        const fileInput = document.getElementById('file-input');
-
-        btnUpload.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', e => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = ev => {
-                selectedImageData = ev.target.result;
-                showPreview(selectedImageData);
-            };
-            reader.readAsDataURL(file);
-        });
-
-        // === Tampilkan Preview ===
-        function showPreview(src) {
-            document.getElementById('preview-section').classList.remove('hidden');
-            document.getElementById('preview-image').src = src;
-            document.getElementById('before-image').src = src;
-            checkCanGenerate();
-        }
-
-        document.getElementById('btn-remove-image').addEventListener('click', () => {
-            selectedImageData = null;
-            fileInput.value = '';
-            document.getElementById('preview-section').classList.add('hidden');
-            document.getElementById('result-section').classList.add('hidden');
-            checkCanGenerate();
-        });
-
-        // === Cek Bisa Klik Buat Desain ===
-        function checkCanGenerate() {
-            document.getElementById('btn-generate').disabled = !selectedImageData;
-        }
-
-        // === Buat Teks Permintaan ===
-        function buatPermintaan() {
-            const deskripsi = document.getElementById('deskripsi').value.trim();
-            let teks = `Ubah gambar ini menjadi desain ${selectedType} gaya ${selectedStyle}, terlihat realistis, rapi, dapat dibangun, pencahayaan alami, berkualitas tinggi`;
-            if (deskripsi) teks += `. Tambahan: ${deskripsi}`;
-            return teks;
-        }
-
-        // === Buat Desain — Menggunakan layanan gratis ===
-        document.getElementById('btn-generate').addEventListener('click', async () => {
-            if (!selectedImageData) {
-                alert('⚠️ Pilih gambar atau ambil foto dulu!');
+        // Buka Halaman AI
+        document.getElementById('btn-buka-ai').addEventListener('click', () => {
+            const teks = document.getElementById('prompt-hasil').value;
+            if (!teks) {
+                alert('Pilih tipe dan gaya desain dulu!');
                 return;
             }
-
-            const permintaan = buatPermintaan();
-            document.getElementById('loading-section').classList.remove('hidden');
-            document.getElementById('result-section').classList.add('hidden');
-            document.getElementById('btn-generate').disabled = true;
-
-            try {
-                // Ekstrak bagian base64
-                const base64Murni = selectedImageData.split(',')[1];
-
-                // Gunakan layanan transformasi gambar gratis (Hugging Face)
-                const res = await fetch('https://api-inference.huggingface.co/models/lllyasviel/sd-controlnet-canny', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        inputs: base64Murni,
-                        parameters: {
-                            prompt: permintaan,
-                            num_inference_steps: 25,
-                            guidance_scale: 7.5
-                        }
-                    })
-                });
-
-                if (!res.ok) {
-                    // Jika model belum siap, beri alternatif
-                    throw new Error('Layanan sedang dimuat. Coba buka halaman ini:');
-                }
-
-                const blob = await res.blob();
-                const hasilUrl = URL.createObjectURL(blob);
-
-                document.getElementById('after-image').src = hasilUrl;
-                document.getElementById('btn-download').href = hasilUrl;
-                document.getElementById('loading-section').classList.add('hidden');
-                document.getElementById('result-section').classList.remove('hidden');
-
-            } catch (err) {
-                // Fallback: berikan cara mudah pakai layanan gratis lain
-                document.getElementById('loading-section').classList.add('hidden');
-                
-                const pesan = `⚠️ ${err.message}
-
-Karena versi gratis butuh waktu untuk memuat, silakan pakai cara yang lebih mudah:
-
-1. Buka ➡️ https://huggingface.co/spaces/runwayml/stable-diffusion-img2img
-2. Tempel teks ini:
-"${permintaan}"
-3. Upload foto Anda
-4. Klik "Generate"
-
-✅ Gratis, tidak perlu daftar, tidak perlu API Key!`;
-                
-                alert(pesan);
-            } finally {
-                checkCanGenerate();
-            }
-        });
-
-        // === Desain Baru ===
-        document.getElementById('btn-baru').addEventListener('click', () => {
-            selectedImageData = null;
-            fileInput.value = '';
-            document.getElementById('preview-section').classList.add('hidden');
-            document.getElementById('result-section').classList.add('hidden');
-            document.getElementById('deskripsi').value = '';
-            checkCanGenerate();
+            // Buka halaman AI gratis di tab baru
+            window.open('https://huggingface.co/spaces/runwayml/stable-diffusion-img2img', '_blank');
+            alert('✅ Halaman AI terbuka!\n\nLangkah selanjutnya:\n1. Salin teks di kotor di atas\n2. Tempel ke kolom Prompt\n3. Upload foto Anda\n4. Klik Generate');
         });
 
         // Inisialisasi
-        checkCanGenerate();
+        updatePrompt();
     </script>
 </body>
 </html>
